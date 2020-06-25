@@ -1,0 +1,10 @@
+{
+  "name": "discord.js-classbased",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/TotalTemplates/discord.js-classbased.git",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.2.0"
+  }
+}
