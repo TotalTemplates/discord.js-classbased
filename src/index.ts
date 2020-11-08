@@ -1,6 +1,6 @@
-import Client from "./classes/Client"
-import onReady from "./events/onReady"
-import onMessage from "./events/onMessage"
+import Client from './classes/Client'
+import onReady from './events/onReady'
+import onMessage from './events/onMessage'
 
 const CreatedClient = new Client()
 

@@ -13,7 +13,7 @@ interface TempSettingInterface {
 export default class eClient extends Client {
     SettingTemp: TempSettingInterface
     Setting: any
-    Commands:Array<any> = []
+    Commands: Array<any> = []
 
     constructor() {
         super()
@@ -50,7 +50,7 @@ export default class eClient extends Client {
         this.login(token)
     }
 
-    regist(event = 'ready', exec:any) {
+    regist(event = 'ready', exec: any) {
         this.on(event, (...args) => {
             exec(this, ...args)
         })
