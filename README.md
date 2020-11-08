@@ -1,15 +1,16 @@
 # 🧾 discord.js-classbased
- > [JS/TS] Class와 모듈 기반의 디스코드 봇 템플릿   
- > Class and Module based Discord-Bot-Template
-   
+[JS/TS] Class와 모듈 기반의 디스코드 봇 템플릿\
+Class and Module based Discord-Bot-Template
+
+> JavaScript 버전을 원하시는 분은 [standard 브렌치](https://github.com/TotalTemplates/discord.js-classbased/tree/standard)로 이동해 주세요\
+> if you want JavaScript version, move to [standard branch](https://github.com/TotalTemplates/discord.js-classbased/tree/standard)
+
 ## 준비물 / REQUIREMENTS
 * node : v12.x 또는 그 이상 (node: v12.x or higher)
 * yarn : v1.x (yarn: v1.x or higher)
 * 커피 한잔 (a cup of coffee ~~(but not java copy)~~)
 
 ## 사용법 / HOW TO USE
-~~(숫자는 0부터 새는겁니다)~~ ~~(we count numbers from zero)~~
-
 ### 0. 템플릿 사용 / USING THE TEMPLETE
 ![Use this template](https://cdn.trinets.xyz/d/aIpFRn8llH.png)\
 를 누른뒤 적절한 이름으로 저장소를 만듭니다
