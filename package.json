@@ -5,7 +5,8 @@
   "repository": "https://github.com/TotalTemplates/discord.js-classbased.git",
   "license": "MIT",
   "scripts": {
-    "start": "tsc && node ./dist/index.js"
+    "start": "tsc && node ./dist/index.js",
+    "eslint":".\\node_modules\\.bin\\eslint **/*.ts --fix"
   },
   "dependencies": {
     "@types/ws": "^7.2.9",
