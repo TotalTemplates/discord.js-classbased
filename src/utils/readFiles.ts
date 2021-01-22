@@ -1,13 +1,16 @@
-import { readdirSync, statSync } from "fs-extra"
-import path from "path"
+import { readdirSync, statSync } from 'fs'
 
 // from https://gist.github.com/kethinov/6658166
-export function readRecursively (Directory:string, Filelist:Array<string> = []) {
-  const files = readdirSync(Directory)
-  files.forEach((file) => {
-    if (statSync(path.join(Directory, file)).isDirectory()) Filelist = readRecursively(path.join(Directory, file), Filelist)
-    else Filelist.push(path.join(Directory, file))
-  })
+export function readRecursively (dirPath: string, fileList: string[] = []) {
+  const files = readdirSync(dirPath)
 
-  return Filelist
+  for (const file of files) {
+    const filePath = dirPath + '/' + file
+    const stat = statSync(filePath)
+
+    if (stat.isFile()) fileList.push(filePath)
+    else fileList = readRecursively(filePath)
+  }
+
+  return fileList
 }
