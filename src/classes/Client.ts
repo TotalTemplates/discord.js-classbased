@@ -1,59 +1,50 @@
-import path from "path"
-import { Client } from "discord.js"
-import { existsSync, readJSONSync } from "fs-extra"
-import { readRecursively } from "../utils/readFiles"
+import path from 'path'
+import { existsSync, readFileSync } from 'fs'
+import { Client } from 'discord.js'
+import { readRecursively } from '../utils'
+import { Command, Config } from '../types'
 
-interface TempSettingInterface {
-    settingPath: string
-    settingExists: boolean
-    commandsPath: string
-    commandsHas: boolean
-}
+const PATH = path.resolve()
 
-export default class eClient extends Client {
-    SettingTemp: TempSettingInterface
-    Setting: any
-    Commands: Array<any> = []
+export default class extends Client {
+  public config: Config
+  public commands: Command[] = []
 
-    constructor() {
-        super()
-        const Path = path.join(__dirname, "./../../settings.json")
-        this.SettingTemp = {
-            settingPath: Path,
-            settingExists: existsSync(Path),
-            commandsPath: path.join(__dirname, "./../commands"),
-            commandsHas: existsSync(path.join(__dirname, "./../commands"))
-        }
+  constructor () {
+    super()
 
-        if (this.SettingTemp.settingExists) {
-            const {
-                token = process.env.TOKEN,
-                prefix = (process.env.PREFIX || '>'),
-                ...settings
-            } = readJSONSync(this.SettingTemp.settingPath)
+    const configPath = PATH + '/config.json'
+    const commandPath = PATH + '/dist/commands'
 
-            if (!token) throw new Error('Token not provided')
-            this.Setting = { token, prefix, ...settings }
-        } else throw new Error('./settings.json not exists')
+    const isConfigExists = existsSync(configPath)
+    const isCommandExists = existsSync(commandPath)
 
-        if (this.SettingTemp.commandsHas) {
-            var Commands: Array<any> = readRecursively(this.SettingTemp.commandsPath)
-                .map((command) => {
-                    if (!command.endsWith('.js')) return
-                    return require(command)
-                })
-            this.Commands = Commands
-        } else throw new Error('./commands/ folder not exists')
+    if (isConfigExists) {
+      const configRaw = readFileSync(configPath).toString('utf-8')
+      const config = JSON.parse(configRaw)
+
+      this.config = {
+        token: config.token || process.env.TOKEN || '',
+        prefix: config.prefix || process.env.PREFIX || '!'
+      }
+    } else {
+      this.config = {
+        token: process.env.TOKEN || '',
+        prefix: process.env.PREFIX || '!'
+      }
     }
 
-    start(token = this.Setting.token) {
-        this.login(token)
+    if (this.config.token.length < 1) throw new Error('TOKEN not provided')
+    if (isCommandExists) {
+      const files = readRecursively(commandPath)
+      for (const file of files) {
+        if (!file.endsWith('.js')) continue
+        this.commands.push(require(file) as Command)
+      }
     }
+  }
 
-    regist(event = 'ready', exec: any) {
-        this.on(event, (...args) => {
-            exec(this, ...args)
-        })
-    }
-
+  public start = (token?: string) => this.login(token || this.config.token)
+  public regist = (event = 'ready', exec: any) =>
+    this.on(event, (...args) => exec(this, ...args))
 }

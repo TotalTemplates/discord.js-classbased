@@ -1,11 +1,8 @@
-import { Message } from "discord.js"
-import Client from "../classes/Client"
+import { Message } from 'discord.js'
+import Client from '../classes/Client'
 
-export default function Ping(client:Client, msg:Message) {
-    msg.channel.send(
-        'pong!\n' +
-        client.ws.ping + 'ms'
-    )
+export default function (client: Client, msg: Message) {
+  msg.channel.send('pong! (' + client.ws.ping + 'ms)')
 }
 
-export const aliases:Array<string> = ['ping', '핑', 'pong'] 
+export const aliases = ['ping', '핑', 'pong']

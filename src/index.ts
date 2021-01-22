@@ -2,8 +2,8 @@ import Client from './classes/Client'
 import onReady from './events/onReady'
 import onMessage from './events/onMessage'
 
-const CreatedClient = new Client()
+const client = new Client()
 
-CreatedClient.start()
-CreatedClient.regist('ready', onReady)
-CreatedClient.regist('message', onMessage)
+client.start()
+client.regist('ready', onReady)
+client.regist('message', onMessage)
