@@ -1,3 +1,7 @@
+> :warning: 지원종료 안내\
+> 이 템플릿은 지원이 종료되었습니다. djs v13을 지원하는 [pmh-only/discordjs-modern-base-ko](https://github.com/pmh-only/discordjs-modern-base-ko)를 사용해 주세요.
+
+
 # 🧾 discord.js-classbased
 [JS/TS] Class와 모듈 기반의 디스코드 봇 템플릿
 
